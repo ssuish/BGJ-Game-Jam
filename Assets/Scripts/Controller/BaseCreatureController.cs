@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,8 @@ public class BaseCreatureController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         checkInAction = playerInput.actions["Check In"];
+
+        InitializeCharacters();
     }
 
     private void OnEnable()
@@ -33,22 +36,44 @@ public class BaseCreatureController : MonoBehaviour
     private void Update()
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
-        Vector2 position = (Vector2)transform.position + move * moveSpeed;
-        transform.position = position;
+        UpdateMovement(move);
 
         bool isHolding = checkInAction.IsPressed();
 
         if (isHolding && !wasHoldingCheckIn)
         {
             checkInHoldStartTime = Time.time;
+            OnCheckInStateChanged(true);
         }
 
         if (!isHolding && wasHoldingCheckIn)
         {
             checkInHoldDuration = Time.time - checkInHoldStartTime;
             Debug.Log($"Check In held for {checkInHoldDuration:F2} seconds. Tag: {gameObject.tag}", gameObject);
+            OnCheckInStateChanged(false);
         }
 
         wasHoldingCheckIn = isHolding;
+    }
+
+    protected virtual void InitializeCharacters()
+    {
+        
+    }
+
+    protected virtual void UpdateMovement(Vector2 moveInput)
+    {
+        Vector2 position = (Vector2)transform.position + moveInput * moveSpeed * Time.deltaTime;
+        transform.position = position;
+    }
+
+    protected virtual void OnCheckInStateChanged(bool isPressed)
+    {
+
+    }
+
+    protected virtual void OnAbilityActivated(string abilityName)
+    {
+        
     }
 }
