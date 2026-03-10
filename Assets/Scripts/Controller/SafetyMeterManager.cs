@@ -65,7 +65,6 @@ public class SafetyMeterManager : MonoBehaviour
 
         if (!Mathf.Approximately(previousDistance, DistanceBetweenPlayers))
         {
-            Debug.Log($"Distance: {DistanceBetweenPlayers}");
             OnDistanceBetweenPlayersChanged?.Invoke(DistanceBetweenPlayers);
         }
     }
