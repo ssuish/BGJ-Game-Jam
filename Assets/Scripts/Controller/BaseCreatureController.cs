@@ -2,21 +2,24 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class BaseCreatureController : MonoBehaviour
 {
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction checkInAction;
-    public float moveSpeed = 0.01f;
+    public float moveSpeed = 3f;
     private bool wasHoldingCheckIn;
     private float checkInHoldStartTime;
     private float checkInHoldDuration;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         checkInAction = playerInput.actions["Check In"];
+        rb = GetComponent<Rigidbody2D>();
 
         InitializeCharacters();
     }
@@ -58,13 +61,13 @@ public class BaseCreatureController : MonoBehaviour
 
     protected virtual void InitializeCharacters()
     {
-        
+
     }
 
     protected virtual void UpdateMovement(Vector2 moveInput)
     {
-        Vector2 position = (Vector2)transform.position + moveInput * moveSpeed * Time.deltaTime;
-        transform.position = position;
+        Vector2 newPosition = rb.position + moveInput * moveSpeed * Time.deltaTime;
+        rb.MovePosition(newPosition);
     }
 
     protected virtual void OnCheckInStateChanged(bool isPressed)
@@ -74,6 +77,6 @@ public class BaseCreatureController : MonoBehaviour
 
     protected virtual void OnAbilityActivated(string abilityName)
     {
-        
+
     }
 }

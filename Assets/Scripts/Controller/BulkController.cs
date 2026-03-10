@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class BulkController : MonoBehaviour
+public class BulkController : BaseCreatureController
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void InitializeCharacters()
     {
-        
-    }
+        base.InitializeCharacters();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        moveSpeed = 6f;
+
+        if (gameObject.tag != "Bulk")
+        {
+            gameObject.tag = "Bulk";
+        }
     }
 }

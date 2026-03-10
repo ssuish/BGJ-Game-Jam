@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class SparkController : MonoBehaviour
+public class SparkController : BaseCreatureController
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    protected override void InitializeCharacters()
     {
-        
+        base.InitializeCharacters();
+
+        moveSpeed = 10f;
+
+        if (gameObject.tag != "Spark")
+        {
+            gameObject.tag = "Spark";
+        }
+
+        // TODO: Sprite and Light2D Components
     }
 }
