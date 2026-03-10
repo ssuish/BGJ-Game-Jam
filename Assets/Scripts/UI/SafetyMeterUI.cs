@@ -14,6 +14,8 @@ public class SafetyMeterUI : MonoBehaviour
 
     private SafetyMeterManager manager;
 
+    // TODO: Add showPrompt() and hidePrompt() on specific game events or tutorial.
+
     private void OnEnable()
     {
         TryBindManager();

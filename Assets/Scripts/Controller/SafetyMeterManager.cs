@@ -76,7 +76,6 @@ public class SafetyMeterManager : MonoBehaviour
 
         if (previousHuddlingState != IsHuddling)
         {
-            Debug.Log("IsHuddling");
             OnHuddlingStateChanged?.Invoke(IsHuddling);
         }
     }
