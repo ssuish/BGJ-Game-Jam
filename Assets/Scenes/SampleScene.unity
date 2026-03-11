@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 521337878}
   - component: {fileID: 521337877}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: Fill - Spark ObjUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0.392}
+  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1069,6 +1069,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1414576539}
+  - component: {fileID: 1414576540}
   m_Layer: 0
   m_Name: CheckInManagers
   m_TagString: Untagged
@@ -1091,6 +1092,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1414390884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1414576540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414576538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed07f3c5d7194d0488f0ce0119d0702a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckInManager
+  safetyMeterManager: {fileID: 1654541568}
+  checkInPromptUI: {fileID: 1681229757}
+  sparkPlayerInput: {fileID: 1156754871}
+  bulkPlayerInput: {fileID: 2126767476}
+  requireTutorialPhase: 0
+  autoActivateWhenEligible: 1
+  requireHuddleForEligibility: 1
+  maxEligibleDistance: 1.75
+  requiredHoldDuration: 1.5
 --- !u!1 &1458805411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,7 +1302,7 @@ GameObject:
   - component: {fileID: 1577979235}
   - component: {fileID: 1577979234}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: Fill - Bulk ObjUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1406,7 +1428,7 @@ GameObject:
   - component: {fileID: 1681229756}
   - component: {fileID: 1681229757}
   m_Layer: 5
-  m_Name: CheckInPromptManager
+  m_Name: CheckInPromptUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1447,8 +1469,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CheckInPromptUI
   promptPanel: {fileID: 1192136615}
   promptText: {fileID: 1906926073}
-  sparkProgressBar: {fileID: 836343710}
-  bulkProgressBar: {fileID: 1687316881}
+  sparkProgressBar: {fileID: 521337877}
+  bulkProgressBar: {fileID: 1577979234}
   feedbackText: {fileID: 1730529816}
   successMessage: Perfect Sync!
   failureMessage: Sync Broken. Try Again.
@@ -1506,7 +1528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0.392}
+  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
