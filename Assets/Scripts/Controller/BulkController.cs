@@ -13,4 +13,14 @@ public class BulkController : BaseCreatureController
             gameObject.tag = "Bulk";
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Spark"))
+        {
+            return;
+        }    
+
+        // Handle collision logic to other objects
+    }
 }
