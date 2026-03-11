@@ -52,7 +52,6 @@ public class BaseCreatureController : MonoBehaviour
         if (!isHolding && wasHoldingCheckIn)
         {
             checkInHoldDuration = Time.time - checkInHoldStartTime;
-            Debug.Log($"Check In held for {checkInHoldDuration:F2} seconds. Tag: {gameObject.tag}", gameObject);
             OnCheckInStateChanged(false);
         }
 
