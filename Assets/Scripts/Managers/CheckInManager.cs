@@ -30,6 +30,11 @@ public class CheckInManager : MonoBehaviour
     [Header("Check-In Input")]
     [SerializeField] private float requiredHoldDuration = 1.5f;
 
+    [Header("Feedback")]
+    [SerializeField] private float feedbackDisplayDuration = 1.2f;
+
+    private Coroutine promptHideCoroutine;
+
     public CheckInFlowState CurrentState { get; private set; } = CheckInFlowState.NotEligible;
     public bool IsEligible { get; private set; }
     public bool IsActive => CurrentState == CheckInFlowState.Active;
@@ -134,10 +139,10 @@ public class CheckInManager : MonoBehaviour
         }
 
         SetState(CheckInFlowState.Success);
-        checkInPromptUI?.ShowSuccessFeedback();
+        checkInPromptUI.ShowSuccessFeedback();
         ResetHoldTracking();
         OnCheckInSucceeded?.Invoke();
-        UpdatePromptVisibility();
+        StartPromptHideDelay();
     }
 
     public void FailCheckInAttempt()
@@ -148,10 +153,27 @@ public class CheckInManager : MonoBehaviour
         }
 
         SetState(CheckInFlowState.Fail);
-        checkInPromptUI?.ShowFailureFeedback();
+        checkInPromptUI.ShowFailureFeedback();
         ResetHoldTracking();
         OnCheckInFailed?.Invoke();
+        StartPromptHideDelay();
+    }
+
+    private void StartPromptHideDelay()
+    {
+        if (promptHideCoroutine != null)
+        {
+            StopCoroutine(promptHideCoroutine);
+        }
+
+        promptHideCoroutine = StartCoroutine(HidePromptAfterDelay());
+    }
+
+    private System.Collections.IEnumerator HidePromptAfterDelay()
+    {
+        yield return new WaitForSeconds(feedbackDisplayDuration);
         UpdatePromptVisibility();
+        promptHideCoroutine = null;
     }
 
     public void CancelCheckInAttempt()
@@ -236,7 +258,7 @@ public class CheckInManager : MonoBehaviour
         if (IsEligible != canBeEligible)
         {
             IsEligible = canBeEligible;
-            OnEligibilityChanged?.Invoke(IsEligible);
+            OnEligibilityChanged.Invoke(IsEligible);
         }
 
         if (!IsEligible)
@@ -273,7 +295,7 @@ public class CheckInManager : MonoBehaviour
     private void UpdatePromptVisibility()
     {
         bool shouldShowPrompt = CurrentState == CheckInFlowState.Eligible || CurrentState == CheckInFlowState.Active;
-        checkInPromptUI?.SetPromptVisible(shouldShowPrompt);
+        checkInPromptUI.SetPromptVisible(shouldShowPrompt);
 
         if (shouldShowPrompt)
         {
