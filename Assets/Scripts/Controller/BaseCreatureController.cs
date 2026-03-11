@@ -36,7 +36,7 @@ public class BaseCreatureController : MonoBehaviour
         checkInAction?.Disable();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
         UpdateMovement(move);
@@ -65,7 +65,7 @@ public class BaseCreatureController : MonoBehaviour
 
     protected virtual void UpdateMovement(Vector2 moveInput)
     {
-        Vector2 newPosition = rb.position + moveInput * moveSpeed * Time.deltaTime;
+        Vector2 newPosition = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
     }
 
