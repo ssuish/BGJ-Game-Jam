@@ -106,3 +106,5 @@ InitTestScene*.unity*
 # OS-specific
 .DS_Store
 Thumbs.db
+
+.fake
