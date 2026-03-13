@@ -139,7 +139,7 @@ public class CheckInManager : MonoBehaviour
         }
 
         SetState(CheckInFlowState.Success);
-        checkInPromptUI.ShowSuccessFeedback();
+        checkInPromptUI?.ShowSuccessFeedback();
         ResetHoldTracking();
         OnCheckInSucceeded?.Invoke();
         StartPromptHideDelay();
@@ -153,7 +153,7 @@ public class CheckInManager : MonoBehaviour
         }
 
         SetState(CheckInFlowState.Fail);
-        checkInPromptUI.ShowFailureFeedback();
+        checkInPromptUI?.ShowFailureFeedback();
         ResetHoldTracking();
         OnCheckInFailed?.Invoke();
         StartPromptHideDelay();
@@ -258,7 +258,7 @@ public class CheckInManager : MonoBehaviour
         if (IsEligible != canBeEligible)
         {
             IsEligible = canBeEligible;
-            OnEligibilityChanged.Invoke(IsEligible);
+            OnEligibilityChanged?.Invoke(IsEligible);
         }
 
         if (!IsEligible)

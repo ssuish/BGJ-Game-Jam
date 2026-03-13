@@ -21,6 +21,7 @@ public class SafetyMeterManager : MonoBehaviour
     public float SafetyMeterPercent => maxSafetyMeter <= 0f ? 0f : SafetyMeterValue / maxSafetyMeter;
     public bool IsHuddling { get; private set; }
     public float DistanceBetweenPlayers { get; private set; }
+    public float DrainRateMultiplier { get; private set; } = 1f;
 
     public event Action<float> OnSafetyMeterValueChanged;
     public event Action<float> OnSafetyMeterPercentChanged;
@@ -58,6 +59,28 @@ public class SafetyMeterManager : MonoBehaviour
         bulk = bulkTransform;
     }
 
+    public void SetDrainRateMultiplier(float multiplier)
+    {
+        DrainRateMultiplier = Mathf.Max(0f, multiplier);
+    }
+
+    public void AddSafety(float amount)
+    {
+        if (Mathf.Approximately(amount, 0f))
+        {
+            return;
+        }
+
+        float previousValue = SafetyMeterValue;
+        SafetyMeterValue = Mathf.Clamp(SafetyMeterValue + amount, 0f, maxSafetyMeter);
+
+        if (!Mathf.Approximately(previousValue, SafetyMeterValue))
+        {
+            OnSafetyMeterValueChanged?.Invoke(SafetyMeterValue);
+            OnSafetyMeterPercentChanged?.Invoke(SafetyMeterPercent);
+        }
+    }
+
     private void UpdateDistance()
     {
         float previousDistance = DistanceBetweenPlayers;
@@ -86,7 +109,7 @@ public class SafetyMeterManager : MonoBehaviour
 
         if (DistanceBetweenPlayers > safeDistanceThreshold)
         {
-            SafetyMeterValue -= drainRatePerSecond * Time.deltaTime;
+            SafetyMeterValue -= drainRatePerSecond * DrainRateMultiplier * Time.deltaTime;
         }
         else
         {
