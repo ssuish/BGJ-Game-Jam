@@ -38,7 +38,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _density: 15
-    - _intensity: 0.89
+    - _intensity: 0.88
     - _outline_thickness: 0.05
     - _power: 5
     - _speed: 2
