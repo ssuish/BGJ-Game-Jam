@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class CheckInPromptUI : MonoBehaviour
 {
-    private const string PromptMessage = "Synchronized Breath: Hold Space + Enter";
-
     [Header("Panel")]
     [SerializeField] private GameObject promptPanel;
     [SerializeField] private TMP_Text promptText;
+    [SerializeField] private string eligiblePromptMessage = "Synchronized Breath: Hold Space + Enter";
+    [SerializeField] private string activeCheckInMessage = "Check In Active";
 
     [Header("Progress")]
     [SerializeField] private Image sparkProgressBar;
@@ -27,7 +27,7 @@ public class CheckInPromptUI : MonoBehaviour
 
     private void Awake()
     {
-        SetPromptText();
+        SetPromptText(false);
         SetPromptVisible(false);
         SetProgress(0f, 0f);
         HideFeedback();
@@ -87,11 +87,16 @@ public class CheckInPromptUI : MonoBehaviour
         ShowFeedback(failureMessage, failureColor);
     }
 
-    private void SetPromptText()
+    public void SetPromptState(bool isActive)
+    {
+        SetPromptText(isActive);
+    }
+
+    private void SetPromptText(bool isActive)
     {
         if (promptText != null)
         {
-            promptText.text = PromptMessage;
+            promptText.text = isActive ? activeCheckInMessage : eligiblePromptMessage;
         }
     }
 

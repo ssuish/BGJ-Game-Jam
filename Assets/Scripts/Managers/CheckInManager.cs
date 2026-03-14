@@ -294,6 +294,15 @@ public class CheckInManager : MonoBehaviour
 
     private void UpdatePromptVisibility()
     {
+        if (checkInPromptUI == null)
+        {
+            OnPromptVisibilityChanged?.Invoke(false);
+            return;
+        }
+
+        bool isActive = CurrentState == CheckInFlowState.Active;
+        checkInPromptUI.SetPromptState(isActive);
+
         bool shouldShowPrompt = CurrentState == CheckInFlowState.Eligible || CurrentState == CheckInFlowState.Active;
         checkInPromptUI.SetPromptVisible(shouldShowPrompt);
 
