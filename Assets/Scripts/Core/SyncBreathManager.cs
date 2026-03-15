@@ -44,7 +44,7 @@ public class SyncBreathManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         ResolveReferences();
         safetyMeterManager?.SetDrainRateMultiplier(1f);
     }

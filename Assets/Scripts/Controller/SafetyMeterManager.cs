@@ -37,7 +37,7 @@ public class SafetyMeterManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         SafetyMeterValue = Mathf.Clamp(SafetyMeterValue, 0f, maxSafetyMeter);
     }
 

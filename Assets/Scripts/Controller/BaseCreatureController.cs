@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +8,7 @@ public class BaseCreatureController : MonoBehaviour
     private InputAction moveAction;
     private InputAction checkInAction;
     public float moveSpeed = 3f;
+    public float SpeedMultiplier { get; private set; } = 1f;
     private bool wasHoldingCheckIn;
     private float checkInHoldStartTime;
     private float checkInHoldDuration;
@@ -65,8 +65,13 @@ public class BaseCreatureController : MonoBehaviour
 
     protected virtual void UpdateMovement(Vector2 moveInput)
     {
-        Vector2 newPosition = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
+        Vector2 newPosition = rb.position + moveInput * moveSpeed * SpeedMultiplier * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
+    }
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        SpeedMultiplier = Mathf.Max(0f, multiplier);
     }
 
     protected virtual void OnCheckInStateChanged(bool isPressed)

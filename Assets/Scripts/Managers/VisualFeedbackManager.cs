@@ -27,7 +27,7 @@ public class VisualFeedbackManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         InitializeAnxietyOverlay();
     }
 
